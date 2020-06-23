@@ -1,3 +1,8 @@
+/**
+ * @author Sebastian Waldbauer <OskarSniper>
+ * @since 1.0.0
+ * @version 1.0.0
+ */
 export class Module {
     private _events: Map<string, Array<Function>>;
     constructor() {
