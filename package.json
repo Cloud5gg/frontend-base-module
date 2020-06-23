@@ -5,7 +5,8 @@
   "repository": "git@gitlab.dev.cloud.mp:cloudmp-dev/AltV/frontend/base-module.git",
   "author": "Sebastian Waldbauer <OskarSniper> <sebi.developer@gmail.com>",
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "@altv/types-client": "^1.1.0"
   }
 }

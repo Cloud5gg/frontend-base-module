@@ -4,7 +4,7 @@ import { Module } from "./module";
 export * from './module';
 export function InitModule(mod: Module, deps?: Array<string>) {
     on('connectionComplete', () => {
-        emit('rp:mod:init', [mod.constructor.name, deps]);
+        emit('rp:mod:init', [mod.constructor.name, 'abc123', deps]);
         on(`rp:mod:${mod.constructor.name}:load`, () => {
             mod.emit(`m:load`);
         });
