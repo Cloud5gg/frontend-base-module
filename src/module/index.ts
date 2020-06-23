@@ -3,6 +3,8 @@
  * @since 1.0.0
  * @version 1.0.0
  */
+export * from './imodule';
+
 export class Module {
     private _events: Map<string, Array<Function>>;
     constructor() {
@@ -11,7 +13,7 @@ export class Module {
 
     on(event: string, cb: any): void {
         if(this._events.has(event)) {
-            this._events.get(event)?.push(cb);
+            (<Function[]>this._events.get(event)).push(cb);
         } else {
             this._events.set(event, [cb]);
         }
@@ -19,8 +21,8 @@ export class Module {
 
     emit(event: string, ...data: any): void {
         if(this._events.has(event)) {
-            this._events.get(event)?.forEach((func) => {
-                func(...data);
+            (<Function[]>this._events.get(event)).forEach((f) => {
+                f(...data);
             });
         }
     }

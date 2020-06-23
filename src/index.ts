@@ -2,13 +2,16 @@ import { on, log, emit } from "alt-client";
 import { Module } from "./module";
 
 export * from './module';
-export function InitModule(name: string, mod: Module) {
+export function InitModule(mod: Module) {
     on('connectionComplete', () => {
-        emit('rp:module:init', [name]);
-        on(`rp:module:${name}:load`, (ok: boolean) => {
+        emit('rp:mod:init', [mod.constructor.name]);
+        on(`rp:mod:${mod.constructor.name}:load`, (ok: boolean) => {
             if(ok) {
                 mod.emit(`m:load`);
             }
+        });
+        on(`rp:mod:${mod.constructor.name}:unload`, () => {
+            mod.emit(`m:unload`);
         });
     });
 }
