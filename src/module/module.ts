@@ -1,5 +1,0 @@
-export class Module {
-    constructor() {
-        
-    }
-}
