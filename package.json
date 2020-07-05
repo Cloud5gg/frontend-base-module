@@ -4,6 +4,9 @@
   "main": "index.js",
   "repository": "git@gitlab.dev.cloud.mp:cloudmp-dev/AltV/frontend/base-module.git",
   "author": "Sebastian Waldbauer <OskarSniper> <sebi.developer@gmail.com>",
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com/"
+  },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
