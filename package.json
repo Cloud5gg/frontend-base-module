@@ -5,7 +5,7 @@
   "repository": "git@gitlab.dev.cloud.mp:cloudmp-dev/AltV/frontend/base-module.git",
   "author": "Sebastian Waldbauer <OskarSniper> <sebi.developer@gmail.com>",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry":"https://npm.pkg.github.com/Cloud5gg"
   },
   "license": "MIT",
   "dependencies": {},
