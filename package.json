@@ -1,11 +1,11 @@
 {
-  "name": "base-module",
-  "version": "1.0.0",
+  "name": "frontend-base-module",
+  "version": "1.0.4",
   "main": "index.js",
-  "repository": "git@gitlab.dev.cloud.mp:cloudmp-dev/AltV/frontend/base-module.git",
+  "repository": "git@github.com:Cloud5gg/frontend-base-module.git",
   "author": "Sebastian Waldbauer <OskarSniper> <sebi.developer@gmail.com>",
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry":"https://npm.pkg.github.com/Cloud5gg"
   },
   "license": "MIT",
   "dependencies": {},
