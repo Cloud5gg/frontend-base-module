@@ -15,7 +15,8 @@ jobs:
         # Defaults to the user or organization that owns the workflow file
         scope: '@cloud5gg'
     - run: npm install
-    - run: npm login --scope=@cloud5gg
+    - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GRP_NM_TOKEN }}" >> ~/.npmrc
+    - run: npm login
     - run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
