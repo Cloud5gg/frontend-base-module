@@ -4,12 +4,16 @@
   "main": "index.js",
   "repository": "git@github.com:Cloud5gg/frontend-base-module.git",
   "author": "Sebastian Waldbauer <OskarSniper> <sebi.developer@gmail.com>",
+  "scripts": {
+    "build": "tsc -d"
+  },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/"
   },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@altv/types-client": "^1.1.0"
+    "@altv/types-client": "^1.1.0",
+    "typescript": "^3.9.6"
   }
 }
