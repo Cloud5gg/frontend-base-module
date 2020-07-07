@@ -4,12 +4,18 @@ import { Module } from "./module";
 export * from './module';
 export function InitModule(mod: Module, deps?: Array<string>) {
     on('connectionComplete', () => {
-        emit('rp:mod:init', [mod.constructor.name, 'abc123', deps]);
-        on(`rp:mod:${mod.constructor.name}:load`, () => {
+        emit('mod:init', [mod.constructor.name.toLowerCase(), 'abc123', deps]);
+
+        on(`mod:${mod.constructor.name.toLowerCase()}:load`, () => {
             mod.emit(`m:load`);
+
+            emit(`mod:${mod.constructor.name.toLowerCase()}:loaded`);
         });
-        on(`rp:mod:${mod.constructor.name}:unload`, () => {
+
+        on(`mod:${mod.constructor.name.toLowerCase()}:unload`, () => {
             mod.emit(`m:unload`);
+
+            emit(`mod:${mod.constructor.name.toLowerCase()}:unloaded`);
         });
     });
 }
