@@ -1,5 +1,5 @@
 import { IModule } from './imodule';
-import { log, clearInterval, clearTimeout, clearEveryTick } from 'alt-client';
+import { log, clearInterval, clearTimeout, clearEveryTick, setInterval, setTimeout, everyTick } from 'alt-client';
 
 export * from './imodule';
 
@@ -22,13 +22,13 @@ export class Module implements IModule {
         this._timeouts = [];
         this._ticks = [];
 
-        this.on('m:load', () => {
+        this.on('load', () => {
             this.load();
         });
 
-        this.on('m:unload', () => {
-            this.unload();
+        this.on('unload', () => {
             this.clearAll();
+            this.unload();
         });
     }
 
@@ -48,7 +48,7 @@ export class Module implements IModule {
         }
     }
 
-    clearAll(): void{
+    clearAll(): void {
         this._intervals.forEach((x: number) => {
             clearInterval(x);
         });
@@ -62,11 +62,40 @@ export class Module implements IModule {
         });
     }
 
+    setInterval(fn: any, time: number): number {
+        let id: number = setInterval(fn, time);
+        this._intervals.push(id);
+        return id;
+    }
+
+    setTimeout(fn: any, time: number): void {
+        let id: number = setTimeout(() => {
+            fn();
+            let i: number = this._timeouts.indexOf(id);
+            if(i > -1) {
+                this._timeouts.splice(i, 1);
+            }
+            clearTimeout(id);
+        }, time);
+        this._timeouts.push(id);
+    }
+
+    setEveryTick(fn: any): void {
+        let id: number = everyTick(() => {
+            fn();
+        });
+        this._ticks.push(id);
+    }
+
     load(): void {
         this._intervals = [];
         this._timeouts = [];
+        this._ticks = [];
+
+        this.emit('loaded');
     }
 
     unload(): void {
+        this.emit('unloaded');
     }
 }

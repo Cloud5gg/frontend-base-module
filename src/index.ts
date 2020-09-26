@@ -3,19 +3,32 @@ import { Module } from "./module";
 
 export * from './module';
 export function InitModule(mod: Module, deps?: Array<string>) {
+    const name: string = mod.constructor.name.toLowerCase();
     on('connectionComplete', () => {
-        emit('mod:init', [mod.constructor.name.toLowerCase(), 'abc123', deps]);
+        emit('mod:init', [name, 'abc123', deps]);
 
-        on(`mod:${mod.constructor.name.toLowerCase()}:load`, () => {
-            mod.emit(`m:load`);
-
-            emit(`mod:${mod.constructor.name.toLowerCase()}:loaded`);
+        on(`mod:${name}:load`, () => {
+            mod.emit('load');
+            mod.on('loaded', () => {
+                emit(`mod:${name}:loaded`);
+            });
         });
 
-        on(`mod:${mod.constructor.name.toLowerCase()}:unload`, () => {
-            mod.emit(`m:unload`);
+        on(`mod:${name}:unload`, () => {
+            mod.emit('unload');
 
-            emit(`mod:${mod.constructor.name.toLowerCase()}:unloaded`);
+            mod.on('unloaded', () => {
+                emit(`mod:${name}:unloaded`);
+            });
+        });
+
+        on(`mod:${name}:data`, (callback_event, obj) => {
+            mod.emit('receive', [callback_event, obj]);
+        });
+
+        mod.on('send', (dest: string, obj: any) => {
+            // structure is   src   dest  data
+            emit(`mod:data`, [name, dest, obj]);
         });
     });
 }
